@@ -39,35 +39,6 @@ This is a fan-made tribute page showcasing the character Alisa Mikhailovna Kujou
 4. **Relationships**: Connections with other characters
 5. **Trivia**: Fun facts and additional details
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- A web browser
-- GitHub account (for hosting)
-
-### Installation
-
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/yourusername/alisa-kujou-page.git
-   ```
-
-2. Navigate to the project directory:
-   ```bash
-   cd alisa-kujou-page
-   ```
-
-3. Open `index.html` in your web browser or serve it using a local server.
-
-### GitHub Pages Deployment
-
-1. Push your code to a GitHub repository
-2. Go to repository Settings
-3. Scroll down to "Pages" section
-4. Select "Deploy from a branch" and choose "main"
-5. Your site will be available at `https://yourusername.github.io/repository-name`
-
 ## 🛠️ Technologies Used
 
 - **HTML5**: Semantic markup structure
@@ -87,13 +58,6 @@ All character information is sourced from the [Roshidere Wiki](https://roshidere
 
 This project is a fan-made tribute and is for educational/non-commercial purposes only. All character rights belong to their respective owners.
 
-## 🤝 Contributing
-
-Feel free to submit issues, feature requests, or pull requests to improve this fan page!
-
-## 📞 Contact
-
-If you have any questions or suggestions, please open an issue on GitHub.
 
 ---
 

@@ -15,27 +15,26 @@
                     <div class="image-carousel">
                         <div class="carousel-container">
                             <div class="carousel-slide active">
-                                <div class="image-placeholder">
+                                <img src="images/alisa-light-novel-cover.png" alt="Alisa - Light Novel Cover" class="carousel-image">
+                                <div class="image-placeholder" style="display: none;">
                                     <span>Alisa - Light Novel Cover</span>
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="image-placeholder">
+                                <img src="images/alisa-school-uniform.png" alt="Alisa - School Uniform" class="carousel-image">
+                                <div class="image-placeholder" style="display: none;">
                                     <span>Alisa - School Uniform</span>
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="image-placeholder">
+                                <img src="images/alisa-casual-outfit.png" alt="Alisa - Casual Outfit" class="carousel-image">
+                                <div class="image-placeholder" style="display: none;">
                                     <span>Alisa - Casual Outfit</span>
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="image-placeholder">
-                                    <span>Alisa - Student Council</span>
-                                </div>
-                            </div>
-                            <div class="carousel-slide">
-                                <div class="image-placeholder">
+                                <img src="images/alisa-special-art.png" alt="Alisa - Special Illustration" class="carousel-image">
+                                <div class="image-placeholder" style="display: none;">
                                     <span>Alisa - Special Illustration</span>
                                 </div>
                             </div>
@@ -49,7 +48,6 @@
                             <span class="indicator" onclick="currentSlide(2)"></span>
                             <span class="indicator" onclick="currentSlide(3)"></span>
                             <span class="indicator" onclick="currentSlide(4)"></span>
-                            <span class="indicator" onclick="currentSlide(5)"></span>
                         </div>
                     </div>
                 </div>
@@ -177,40 +175,32 @@
                 <h2>Character Gallery</h2>
                 <div class="gallery-grid">
                     <div class="gallery-item">
-                        <div class="gallery-placeholder">
+                        <img src="images/alisa-light-novel-cover.png" alt="Light Novel Vol. 1 Cover" class="gallery-image">
+                        <div class="gallery-placeholder" style="display: none;">
                             <span>Light Novel Vol. 1 Cover</span>
                         </div>
                         <p>Official Light Novel Cover</p>
                     </div>
                     <div class="gallery-item">
-                        <div class="gallery-placeholder">
+                        <img src="images/alisa-school-uniform.png" alt="School Uniform" class="gallery-image">
+                        <div class="gallery-placeholder" style="display: none;">
                             <span>School Uniform</span>
                         </div>
                         <p>Seirei Academy Uniform</p>
                     </div>
                     <div class="gallery-item">
-                        <div class="gallery-placeholder">
+                        <img src="images/alisa-casual-outfit.png" alt="Casual Outfit" class="gallery-image">
+                        <div class="gallery-placeholder" style="display: none;">
                             <span>Casual Outfit</span>
                         </div>
                         <p>Everyday Clothes</p>
                     </div>
                     <div class="gallery-item">
-                        <div class="gallery-placeholder">
-                            <span>Student Council</span>
-                        </div>
-                        <p>Council Treasurer</p>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder">
+                        <img src="images/alisa-special-art.png" alt="Special Art" class="gallery-image">
+                        <div class="gallery-placeholder" style="display: none;">
                             <span>Special Art</span>
                         </div>
                         <p>Promotional Illustration</p>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder">
-                            <span>Manga Art</span>
-                        </div>
-                        <p>Manga Adaptation</p>
                     </div>
                 </div>
             </section>
@@ -307,6 +297,15 @@
             startAutoSlide();
         }
 
+        // Handle image loading errors
+        function handleImageError(img) {
+            img.style.display = 'none';
+            const placeholder = img.nextElementSibling;
+            if (placeholder && placeholder.classList.contains('image-placeholder')) {
+                placeholder.style.display = 'flex';
+            }
+        }
+
         // Initialize carousel
         document.addEventListener('DOMContentLoaded', function() {
             showSlide(slideIndex);
@@ -316,6 +315,18 @@
             const carousel = document.querySelector('.image-carousel');
             carousel.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
             carousel.addEventListener('mouseleave', startAutoSlide);
+            
+            // Handle image loading errors for carousel
+            const carouselImages = document.querySelectorAll('.carousel-image');
+            carouselImages.forEach(img => {
+                img.addEventListener('error', () => handleImageError(img));
+            });
+            
+            // Handle image loading errors for gallery
+            const galleryImages = document.querySelectorAll('.gallery-image');
+            galleryImages.forEach(img => {
+                img.addEventListener('error', () => handleImageError(img));
+            });
         });
 
         // Smooth scrolling for navigation links

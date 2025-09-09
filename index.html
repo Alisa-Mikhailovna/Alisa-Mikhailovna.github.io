@@ -12,8 +12,45 @@
         <div class="container">
             <div class="hero-content">
                 <div class="character-image">
-                    <div class="image-placeholder">
-                        <span>Alisa Mikhailovna Kujou</span>
+                    <div class="image-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-slide active">
+                                <div class="image-placeholder">
+                                    <span>Alisa - Light Novel Cover</span>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="image-placeholder">
+                                    <span>Alisa - School Uniform</span>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="image-placeholder">
+                                    <span>Alisa - Casual Outfit</span>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="image-placeholder">
+                                    <span>Alisa - Student Council</span>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="image-placeholder">
+                                    <span>Alisa - Special Illustration</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-controls">
+                            <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button>
+                            <button class="carousel-btn next" onclick="changeSlide(1)">❯</button>
+                        </div>
+                        <div class="carousel-indicators">
+                            <span class="indicator active" onclick="currentSlide(1)"></span>
+                            <span class="indicator" onclick="currentSlide(2)"></span>
+                            <span class="indicator" onclick="currentSlide(3)"></span>
+                            <span class="indicator" onclick="currentSlide(4)"></span>
+                            <span class="indicator" onclick="currentSlide(5)"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="hero-text">
@@ -33,6 +70,7 @@
                 <li><a href="#personality">Personality</a></li>
                 <li><a href="#background">Background</a></li>
                 <li><a href="#relationships">Relationships</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#trivia">Trivia</a></li>
             </ul>
         </div>
@@ -135,6 +173,48 @@
                 </div>
             </section>
 
+            <section id="gallery" class="content-section">
+                <h2>Character Gallery</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">
+                            <span>Light Novel Vol. 1 Cover</span>
+                        </div>
+                        <p>Official Light Novel Cover</p>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">
+                            <span>School Uniform</span>
+                        </div>
+                        <p>Seirei Academy Uniform</p>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">
+                            <span>Casual Outfit</span>
+                        </div>
+                        <p>Everyday Clothes</p>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">
+                            <span>Student Council</span>
+                        </div>
+                        <p>Council Treasurer</p>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">
+                            <span>Special Art</span>
+                        </div>
+                        <p>Promotional Illustration</p>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">
+                            <span>Manga Art</span>
+                        </div>
+                        <p>Manga Adaptation</p>
+                    </div>
+                </div>
+            </section>
+
             <section id="trivia" class="content-section">
                 <h2>Trivia & Details</h2>
                 <div class="trivia-grid">
@@ -183,6 +263,61 @@
     </footer>
 
     <script>
+        // Carousel functionality
+        let slideIndex = 1;
+        let autoSlideInterval;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            if (n > slides.length) slideIndex = 1;
+            if (n < 1) slideIndex = slides.length;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[slideIndex - 1].classList.add('active');
+            indicators[slideIndex - 1].classList.add('active');
+        }
+
+        function changeSlide(n) {
+            slideIndex += n;
+            showSlide(slideIndex);
+            resetAutoSlide();
+        }
+
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlide(slideIndex);
+            resetAutoSlide();
+        }
+
+        function autoSlide() {
+            slideIndex++;
+            showSlide(slideIndex);
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(autoSlide, 4000); // Change slide every 4 seconds
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+
+        // Initialize carousel
+        document.addEventListener('DOMContentLoaded', function() {
+            showSlide(slideIndex);
+            startAutoSlide();
+            
+            // Pause auto-slide on hover
+            const carousel = document.querySelector('.image-carousel');
+            carousel.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+            carousel.addEventListener('mouseleave', startAutoSlide);
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

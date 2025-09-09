@@ -209,7 +209,7 @@
                         </div>
                         <p>Promotional Illustration</p>
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item manga-item" onclick="openMangaModal()">
                         <img src="images/alisa-manga-art.png" alt="Manga Art" class="gallery-image">
                         <div class="gallery-placeholder" style="display: none;">
                             <span>Manga Art</span>
@@ -265,6 +265,22 @@
             <p>© 2024 Alisa Mikhailovna Kujou Fan Page</p>
         </div>
     </footer>
+
+    <!-- Manga Modal -->
+    <div id="mangaModal" class="manga-modal">
+        <div class="manga-modal-content">
+            <div class="manga-modal-header">
+                <h3>Manga Adaptation - Alisa Kujou</h3>
+                <button class="manga-modal-close" onclick="closeMangaModal()">&times;</button>
+            </div>
+            <img src="images/alisa-manga-art.png" alt="Manga Art - Alisa Kujou" class="manga-modal-image">
+            <div class="manga-modal-description">
+                <h4>About This Manga Panel</h4>
+                <p>This black and white manga panel showcases Alisa's character design in the manga adaptation of the series. The intricate line art captures her ethereal beauty and tsundere personality, with detailed shading that brings depth to her expression and the overall composition.</p>
+                <p><strong>Art Style:</strong> Traditional manga illustration with fine line work and cross-hatching techniques.</p>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Carousel functionality
@@ -377,6 +393,60 @@
                     link.classList.add('active');
                 }
             });
+        });
+
+        // Manga Modal functionality
+        function openMangaModal() {
+            const modal = document.getElementById('mangaModal');
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            
+            // Add entrance animation
+            const modalContent = modal.querySelector('.manga-modal-content');
+            modalContent.style.animation = 'modalSlideIn 0.3s ease-out';
+        }
+
+        function closeMangaModal() {
+            const modal = document.getElementById('mangaModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            const modal = document.getElementById('mangaModal');
+            if (event.target === modal) {
+                closeMangaModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeMangaModal();
+            }
+        });
+
+        // Add special hover effects for manga panel
+        document.addEventListener('DOMContentLoaded', function() {
+            const mangaItem = document.querySelector('.manga-item');
+            if (mangaItem) {
+                // Add cursor pointer to indicate clickability
+                mangaItem.style.cursor = 'pointer';
+                
+                // Add keyboard accessibility
+                mangaItem.setAttribute('tabindex', '0');
+                mangaItem.setAttribute('role', 'button');
+                mangaItem.setAttribute('aria-label', 'Open manga panel in larger view');
+                
+                // Handle keyboard interaction
+                mangaItem.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        openMangaModal();
+                    }
+                });
+            }
         });
     </script>
 </body>
